@@ -1,0 +1,247 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{pifont}
+\newcommand{\tick}{\ding{51}}
+\newcommand{\cross}{\ding{55}}
+\usepackage[dvipsnames]{xcolor}
+\newcommand{\e}[1]{{\mathbb E}\left[ #1 \right]}
+\textwidth 18cm \oddsidemargin -0.5cm \topmargin -2.25cm \textheight
+25cm \footskip 0.7cm \usepackage{epsfig}
+\usepackage{amsmath,graphicx,psfrag,pstcol}
+\def\n{\noindent}
+\def\u{\underline}
+\def\hs{\hspace}
+\newcommand{\thrfor}{.^{\displaystyle .} .}
+\newcommand{\bvec}[1]{{\bf #1}}
+\graphicspath{{./Figures/}}
+
+\begin{document}
+
+\noindent
+\rule{15.7cm}{0.5mm}
+
+
+\begin{center}
+{\bf ENGINEERING TRIPOS PART IIA}\\
+\vspace{0.5cm} {\bf 3G3 Lab Report - Coding in the Visual Cortex}\\
+\vspace{0.5cm}
+{\bf Name: Aaron Fleming}\\
+\end{center}
+\rule{15.7cm}{0.5mm}
+
+\hfill\\
+
+\section{Introduction and Background}
+At first, the coding capacity required by the visual system to transmit and process information about the visual field seems almost impossible - as the Lab handout details, the size of the state-space for ~100 million receptors, each of which can process luminance almost continuously, gives rise to an almost impossibly large number of potential images. However, as we will see in section 3, images in the natural world do not have their pixels evenly distributed over the entire state-space, but group into clusters, and along lines and planes (in real terms - a pixel is unlikely to be very dissimilar from its neighbouring pixels), as we may expect. This opens the possibility for increased coding efficiency - if we decide that we do not need to capture every detail of an image, but rather, the majority of its variance and its key features, we can vastly improve the almost impossible challenge the visual system faces.\\
+
+\subsection{Compact Coding}
+The main method used to achieve compact coding here is PCA. The basis of PCA in this context is that we aim to reduce the dimensionality of our image, in order to reduce the number of neurons required to encode the image. In order to achieve this, it is possible to devise a new set of orthogonal vectors, each of which is orientated to capture the maximum variance of the set of images in the original state-space. Figure 1, from the handout, shows how this can be used to reduce the dimensionality - here, rather than using 2 neurons, each to encode the luminance of a pixel, instead we can encode both luminances approximately with a single neuron, since the luminances correlate well. Figure 2 shows various images that could be encoded in a lossless way, using this principle.
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \caption{The basis of PCA}
+        \includegraphics[width=1\textwidth]{Fig1} % first figure itself
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \caption{2-pixel example images encoded losslessly by the PCA as shown in Figure 1:}
+        \includegraphics[width=1\textwidth]{Fig2} % second figure itself
+    \end{minipage}
+\end{figure}
+
+However, PCA would perform much less well on other datasets. Below are 2 examples which would result in varying degrees of information loss if we attempted to reduce the dimensionality from 2D to 1D. It would be essentially impossible to reduce the dimensionality of dataset A using PCA - PC1 below would come close to the best result, but it is obvious that a large amount of data would be lost. It would be possible to reduce dataset B to one dimension, but not perfectly - some data would be lost. It is worth noting that, in both datasets (but particularly dataset A), PCA would perform much better if we could change to polar coordinates, in which case it would be relatively easy to reduce to one dimension ($\theta$). This is possible with another form of PCA known as kernel PCA, but will not be further discussed here.
+
+\begin{figure}[h!]
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \caption{Dataset A}
+        \includegraphics[width=1\textwidth]{Fig3}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        \caption{Dataset B}
+        \includegraphics[width=1\textwidth]{Fig4}
+    \end{minipage}
+\end{figure}
+
+\subsection{Images}
+The provided images are taken from a variety of situations. {\fontfamily{qcr}\selectfont{I1}} is a section of text, {\fontfamily{qcr}\selectfont{I2}} is a series of images from nature, and {\fontfamily{qcr}\selectfont{I3}} appears to be artificially generated images of varying (random) luminances. {\fontfamily{qcr}\selectfont{I2w}} is the set of images {\fontfamily{qcr}\selectfont{I2}} with what appears to be the contrast significantly lowered. As we will see later, this has interesting effects on the variance of the PCA of the images and on their encoding via several different schemes.
+
+\section{Compact Coding and PCA}
+\subsection{Image {\fontfamily{qcr}\selectfont{I1}}}
+Using the pre-written {\fontfamily{qcr}\selectfont{pca3g3}} function, the basis functions for {\fontfamily{qcr}\selectfont{I1}} were found, and examined. The basis functions 1, 2, 3 and 8 are shown below in Figure 5 (note, these were performed with {\fontfamily{qcr}\selectfont{nsamp}} $= 100000$ to obtain smoother and more consistent results).
+
+\begin{figure}[h!]
+\begin{center}
+\caption{First 16 basis functions from PCA of {\fontfamily{qcr}\selectfont{I1}}:}
+\includegraphics[width=10cm]{{Fig5.0}.png}
+\vspace{0cm}\\
+{Basis functions 1, 2, 3 and 8, from {\fontfamily{qcr}\selectfont{I1}}:}
+\vspace{0cm}
+\end{center}
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        {1 - detecting boundaries between letters and the page}
+        \includegraphics[width=1\textwidth]{{Fig5.1}.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.24\textwidth}
+        \centering
+        {2 - detecting thick horizontal bars}
+        \includegraphics[width=1\textwidth]{{Fig5.2}.png}
+    \end{minipage}
+        \begin{minipage}{0.24\textwidth}
+        \centering
+        {3 - detecting thin vertical bars}
+        \includegraphics[width=1\textwidth]{{Fig5.3}.png}
+    \end{minipage}
+            \begin{minipage}{0.24\textwidth}
+        \centering
+        {8 - detecting thin horizontal bars}
+        \includegraphics[width=1\textwidth]{{Fig5.4}.png}
+    \end{minipage}
+\end{figure}
+
+These bases show fairly easily what features they are likely selecting for fairly intuitively. Other bases are less easy to determine what they may be selecting for, particularly "later" bases that are responsible for tiny amounts of variance.\\
+With {\fontfamily{qcr}\selectfont{nsamp}} $= 1000$, the minimum number of principle components accounting for as close to $90\%$ of the variance was found to vary between 101 and 102 bases. Note that with {\fontfamily{qcr}\selectfont{nsamp}} set to progressively higher values, the number of bases required to account for 90\% of the variance increased, and was closer to 115 bases for very large {\fontfamily{qcr}\selectfont{nsamp}}.\\
+Next, the activation of the bases were examined by applying them to the image by convolution. Figures 6 and 7 below shows the results.\\
+
+\begin{figure}[h!]
+\begin{center}
+\caption{{\fontfamily{qcr}\selectfont{I1}}}
+        \includegraphics[width = 10cm]{{Fig6.0}.png}
+        \end{center}
+\end{figure}
+\vspace{0cm}
+\begin{figure}[h!]
+\caption{Basis functions 1, 2, 3 and 8, from {\fontfamily{qcr}\selectfont{I1}}, overlayed with {\fontfamily{qcr}\selectfont{I1}}:}
+    \begin{minipage}{0.5\textwidth}
+    \vspace{0.25cm}
+        \centering
+        {1: Lower border of text}
+        \includegraphics[width=0.75\textwidth]{{Fig6.1}.png}
+        \vspace{0cm}\\
+        {3: Vertical bars in text}\\
+        \includegraphics[width=0.75\textwidth]{{Fig6.3}.png}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \vspace{0.25cm}
+        \centering
+        {2: Areas of text}
+        \includegraphics[width=0.75\textwidth]{{Fig6.2}.png}\\
+        {8: Horizontal bars in text}
+        \includegraphics[width=0.75\textwidth]{{Fig6.4}.png}
+    \end{minipage}
+\end{figure}
+In Figure 7, the overlayed image shows the areas of activation in relation to the original image, ie. shows which aspects of the image the base is sensitive to. These are the lighter "highlighted" areas on the image. On close inspection of the overlay and the filtered image, we can see that most of our original guesses at features were correct. In fact, these bases are rather similar to what we would expect to see in V1 - particularly for bases 2, 3 and 8 - bars of a certain orientation. Here, since the image is systematic, in a way, most of the bars we see are horizontal or vertical, rather than at other angles. If we were in V1, however, each "function" would not be applied by convolution, however, but rather, with each neurons related position in the visual field encoded by its particular location in the cortex. So the parallel lines we see in 3 and 8 would actually correspond to several neurons in neighbouring hypercolumns (each hypercolumn contains all the neurons corresponding to all bar orientations (and all other sensitivities) at a single point in visual space). So if we were to sketch the receptive field of the corresponding "neurons" for bases 2, 3 and 8, they would appear as follows:\\
+\begin{figure}[h!]
+\begin{center}
+\caption{Approximation of selection of features by PCs 2, 3 and 8:}
+        \includegraphics[width = 18cm]{{Fig8}.png}
+        \end{center}
+\end{figure}
+
+\subsection{Image set {\fontfamily{qcr}\selectfont{I3}}}
+The same {\fontfamily{qcr}\selectfont{pca3g3}} function was applied to the image set {\fontfamily{qcr}\selectfont{I3}}. {\fontfamily{qcr}\selectfont{I3}} was a set of images composed of seemingly random luminances producing a speckled pattern. The basis functions obtained were similar across all 256 bases, and the first 9 functions are shown in Figure 9.\\
+
+\begin{figure}[h!]
+\begin{center}
+\caption{First 9 basis functions for image set {\fontfamily{qcr}\selectfont{I3}}}
+        \includegraphics[width = 11cm]{{Fig9}.png}
+        \end{center}
+\end{figure}
+This seemingly random pattern of activation left very little space for interpretation - it seems to correspond to specific distances and directions between bright spots on the images. As we would expect for such a "difficult" image, the number of PCs required to account for 90\% of the variance was high - consistently 221 bases when {\fontfamily{qcr}\selectfont{nsamp}} $= 1000$.
+
+\subsection{Image set {\fontfamily{qcr}\selectfont{I2}}}
+This time, the same process was performed with the image set {\fontfamily{qcr}\selectfont{I2}}. The first 16 basis functions are shown in figure 10.\\
+\begin{figure}[h!]
+\begin{center}
+\caption{First 16 basis functions for image set {\fontfamily{qcr}\selectfont{I2 $($nsamp}} $= 100000$):}
+        \includegraphics[width = 11cm]{{Fig10}.png}
+        \end{center}
+\end{figure}
+As with {\fontfamily{qcr}\selectfont{I1}}, the basis functions we see look rather interpretable. The first seems to resemble a simple "on-centre" bipolar cell of the retina, and many of the others seem to select for bars of a particular orientation (much like the cells of V1). Unlike {\fontfamily{qcr}\selectfont{I1}}, we now see a wider variety of orientation angles, however, as we would expect, since these images are "natural". In fact, if we display more basis functions, we see an even wider variety of orientation angles. This suggests that PCA may be a reasonable model of V1 receptive fields, though not perfect.\\
+Perhaps more surprisingly, vastly fewer PCs are required to account for 90\% of the variance of the images - around 16 bases (a number that now, does not change with increasing {\fontfamily{qcr}\selectfont{nsamp}}). This is a drastic reduction on what we saw even for {\fontfamily{qcr}\selectfont{I1}}, which we would expect to be an "easier" image in many senses. In fact, the first PC accounts for more than 70\% of the variance - a massive amount, in some ways reminiscent of Figure 1. This suggests PCA can be thought of in a similar sense to SVD - diagonalisation of a matrix where the leading diagonal is a series of decreasing terms, analogous with variance here. This means that each basis function is orientated in such a way that it captures the most of the remaining variance - which is essentially the most "detail" about the image.
+
+\section{Sparse Coding}
+\subsection{Background and Code}
+Whereas the compact coding theory models optimisation of the visual system as aiming to reduce the number of neurons required to transmit detail about any image (ie. reducing dimensionality), the sparse coding theory attempts to minimise the number of neurons in a fixed pool that are active at any one time, so that only a small proportion are active at any one time. This idea is summarised in Figure 2 of the handout, shown below in Figure 11.
+\begin{figure}[h!]
+\begin{center}
+\caption{Figure 2 from the handout illustrating the differences between compact and sparse coding:}
+        \includegraphics[width = \textwidth]{{Fig11}.png}\\
+        \end{center}
+\end{figure}
+
+By solving the optimisation problems given in the handout, we can try and model the sparse coding problem by alternating finding the optimal activations given the basis functions, and the optimal basis functions given the activations, repeating over many iterations in order to return the "optimal" (that is "most sparse") basis functions. The equations and code used in {\fontfamily{qcr}\selectfont{spfunc.m}} (1) (the basis of minimising the activations) and {\fontfamily{qcr}\selectfont{basefunc.m}} (2) are given below:
+
+\begin{equation}
+\begin{split}
+\frac{\partial C({\bf a})}{\partial {\bf a}} = 2{\bf B}^T{\bf B} - 2{\bf B}^T{\bf s} + 2\lambda \frac{\frac{{\bf a}}{\sigma^2}}{1 + \frac{{\bf a}}{\sigma^2}}
+\end{split}
+\end{equation}
+{\fontfamily{qcr}\selectfont{function [cost,dcost]=spfunc(a,B,s,sigma,lambda)\\
+cost =(s - B*a)'*(s - B*a) + lambda*sum(log(1+(a.\^{}2/sigma\^{}\^{}2)));\\
+dcost= 2*B'*B*a - 2*B'*s + lambda*(2*a/sigma\^{}2)./(1+a.\^{}2/sigma\^{}2);}}\\
+
+and
+\begin{equation}
+\begin{split}
+\frac{\partial C}{\partial{\bf B}} = 2{\bf B}{\bf a}{\bf a}^T - 2{\bf s}{\bf a}^T
+\end{split}
+\end{equation}
+{\fontfamily{qcr}\selectfont{function dcost=basefunc(a,B,s)\\
+dcost= 2*B*a*a' - 2*s*a';}}
+
+The speed of the minimisation function of {\bf a} using {\fontfamily{qcr}\selectfont{minimize()}} was measured and compared with the {\fontfamily{qcr}\selectfont{fast\_minimize()}} command. {\fontfamily{qcr}\selectfont{minimize}} tended to be around 50 times slower ($\approx$0.25s vs $\approx$0.005s for {\fontfamily{qcr}\selectfont{fast\_minimize}}).
+
+\subsection{Finding a sparse code}
+The {\fontfamily{qcr}\selectfont{sparseopt}} command computes the process described above ie using {\fontfamily{qcr}\selectfont{spfunc.m}} and {\fontfamily{qcr}\selectfont{basefunc.m}} to alternate optimisation of {\bf a} given {\bf B} and vice versa, using the {\fontfamily{qcr}\selectfont{fast\_minimize}} function. However, after each iteration, it requires normalisation of the bases, since {\fontfamily{qcr}\selectfont{spfunc.m}} involves the operation $2{\bf B}^T{\bf B}$, which will tend to increase the size {\bf a} and {\fontfamily{qcr}\selectfont{basefunc.m}} involves the operation $2{\bf Baa}^T$, which will tend to increase the size of ${\bf B}$. Note that this is not necessarily a positive increase - values will grow towards $-\infty$ as well as $\infty$.\\
+To mitigate this, the command {\fontfamily{qcr}\selectfont{B = normalize\_bases(B,A);}} was added - this serves essentially to divide column of ${\bf B}$ by its 2-norm in order to ensure that the values do not grow. We can check this by performing  {\fontfamily{qcr}\selectfont{sqrt(sum(B.*B))}}, which reveals that the 2-norm of each column (at the end of each iteration) is readjusted to 1.
+\subsubsection{A sparse code for {\fontfamily{qcr}\selectfont{I3}}}
+{\fontfamily{qcr}\selectfont{sparseopt}} was run on the image set {\fontfamily{qcr}\selectfont{I3}}, with the bases shown below in Figure 12.
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Bases obtained via sparse coding for the image set {\fontfamily{qcr}\selectfont{I3}}:}
+        \includegraphics[width = 12.9cm]{{Fig12}.png}\\
+        \end{center}
+\end{figure}
+When we compare these with Figure 9, we see several differences immediately. Whereas the functions in Figure 9 appear to show random patterns, the functions in Figure 12 are rather reminiscent of bipolar cells in the retina - both on- (eg base 1) and off-centre (eg. base 3) "bipolar cells" can be seen, sensitive to different points in space. Note that for most (if not every) pixel, there is a basis function that is either on- or off- selective for it. This means that our sparse code can be sensitive to pixels in specific locations - perfect for the image set {\fontfamily{qcr}\selectfont{I3}}, which contains random high intensity pixels.
+
+\subsubsection{A sparse code for {\fontfamily{qcr}\selectfont{I2w}}}
+
+The same process was performed with {\fontfamily{qcr}\selectfont{I2w}}, with the basis functions shown below in Figure 13.
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Bases obtained via sparse coding for the image set {\fontfamily{qcr}\selectfont{I2w}}:}
+        \includegraphics[width = 12.9cm]{{Fig13}.png}\\
+        \end{center}
+\end{figure}
+Many of these show strong resemblance to the basis functions shown in Figure 10 for {\fontfamily{qcr}\selectfont{I2}}, with the majority showing orientation bars of varying orientation and width. One of the main differences we see are that now, each base with an orientation bar has only one, compared to Figure 10, where 3 or more bars were not uncommon. The other main difference is that now, we see orientation bars of a wider variety of angles, which is much more similar to what we may see in the brain. In fact, the quality of the detail encoding by these basis functions from sparse coding vs even the "best" basis functions of those obtained by compact coding is impressive. Figure 14 shows a comparison between one of the basis functions of the sparse code (base 50) and base 1 from the compact code (capturing the most variance), both filtering one of the images from {\fontfamily{qcr}\selectfont{I2}}. It is worth noting that although the filtered image with Base 50 was one of the best, the majority of the bases obtained high quality filtered images. Some of the other advantages of sparse coding are detailed in section 6 of the handout.\\\hfill\\
+\begin{figure}[!h]
+\caption{A comparison between a basis function obtained from the sparse code and one obtained from compact coding:}
+\vspace{0.25cm}
+    \centering
+    \begin{minipage}{0.5\textwidth}
+        \centering
+        {Sparse Coding Base Function 50}
+        \includegraphics[width=1\textwidth]{Fig14}
+    \end{minipage}\hfill
+    \begin{minipage}{0.5\textwidth}
+        \centering
+       {Compact Coding Base Function 1}
+        \includegraphics[width=1\textwidth]{{Fig14.2}.png}
+    \end{minipage}
+\end{figure}
+
+\section{Conclusions and Further Simulation}
+Using the findings from these simulations, then, we can see how the state-space of the receptors in the retina, which in theory is of almost impossible magnitude, can be compacted into a much more "reasonable" size by use of efficient coding mechanisms. Research into the neural mechanisms surrounding the visual system has given us enough information to deduce that our models may not be totally inaccurate - we see the same patterns of orientation bars in our sparse and compact coding models that we do in simple cells in V1. However, we must be careful to to ascribe too much weight to this - our model in many ways relies on the idea that the visual system processes visual information as "pixels", but this is far from the truth. In reality, parallel parvocellular (for detail) and magnocellular (for movement and luminance) work together in order to achieve the best visualisation of whatever is most appropriate at the time. The magnocellular pathway is used to identify general areas of interest, especially those areas of the visual field that contain movement, and the parvocellular pathway is then used to image these areas in more detail. V1 also contains other cells - most notably after simple cells are the complex cells, which handle specific directional movement of bars of a certain orientation, but being less specific for location. Nor, in fact, is V1 even close to being the whole story - paths through V2 and V4 (the ventral stream) handle higher levels of detail analysis, whereas paths through V2, V3 and V5 (the dorsal stream) handle information on where relevant parts of the image lie, and where attention should be focused.\\\hfill\\
+Obviously not all of these shortcomings are "deal-breakers" for our coding models - much of this processing is downstream from the simple cells of V1, and so may only require modification of our model as we move through the streams. In reality, our model completes a small section in the middle of the pathway - the processing by the parvocellular pathway after direction by the magnocellular pathway. It may be useful, then, to attempt more simulations to fill the upstream gap - how would a simulation deal with processing a moving image? An interesting investigation would be to see if a coding model can be found that works similarly to the visual system when presented with a moving image - would the model choose to select for the areas that are moving, and assign these areas for more detailed processing, or would some other system be adopted? This may also be able to provide some insight into complex cells and their sensitivity to moving orientation bars.\\\hfill\\
+Investigation into colour-handling would also be another interesting simulation. It is obvious from some simple biological (and physical) analysis that a complex, evolved mammal should be (for maximal efficiency) a trichromat (having 3 cones of different wavelength sensitivity profiles), but, given the choice of various wavelength sensitivities, what wavelengths would a simulation choose in order to maximise the efficiency of visual processing? Humans tend to focus well for red and green light (also due to unfortunate biology and physics of the eyeball, which means we can only focus very well for a small range of wavelengths, with acuity trailing off for wavelengths away from this optimal wavelength range), but how would a simulation decide how to maximise this?
+
+
+
+\end{document}

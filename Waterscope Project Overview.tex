@@ -5,7 +5,6 @@
 \newcommand{\tick}{\ding{51}}
 \newcommand{\cross}{\ding{55}}
 \usepackage[dvipsnames]{xcolor}
-\newcommand{\e}[1]{{\mathbb E}\left[ #1 \right]}
 \textwidth 18cm \oddsidemargin -0.5cm \topmargin -2.25cm \textheight
 25cm \footskip 0.7cm \usepackage{epsfig}
 \usepackage{amsmath,graphicx,psfrag,pstcol}
@@ -15,7 +14,12 @@
 \newcommand{\thrfor}{.^{\displaystyle .} .}
 \newcommand{\bvec}[1]{{\bf #1}}
 \graphicspath{{./Figures/}}
-
+\usepackage{pgfgantt}
+\def\pgfcalendarweekdayletter#1{
+%
+\ifcase#1M\or T\or W\or T\or F\or S\or S\fi
+%
+}
 \begin{document}
 
 \noindent
@@ -42,19 +46,41 @@ The second idea, and the idea which the WaterScope team recommended that we purs
 \subsection{Technical Aspects}
 
 \subsection{Project Management Plan}
-Project Management Plan
-
-Our project outline will be centred on the following Gantt chart, which details the specific tasks to be completed by certain dates. 
-
-We are using Slack for all project communication, both between team members and to communicate with the team at Waterscope. 
-
-Github is being used for all file uploads, to track progress and changes made by individual group members, and to show who has contributed to which parts of the group projects.
-
+Our project outline will be centred on the following Gantt chart, which details the specific tasks to be completed by certain dates.\\
+We are using Slack for all project communication, both between team members and to communicate with the team at Waterscope.\\
+Github is being used for all file uploads, to track progress and changes made by individual group members, and to show who has contributed to which parts of the group projects.\\
 We plan to complete the first project proposal collaboratively, by working on separate parts, uploading them to GIT and then adding and editing the work of our peers as we best see fit.
-
-
+\subsubsection{Timeline}
 The following Gantt Chart, team strengths and training plans detail the key points of the project management plan to be discussed.
-\subsubsection{Timeline?}
+\begin{figure}[h]
+\begin{center}
+\begin{ganttchart}[
+hgrid,
+vgrid,
+x unit=4mm, y unit title=7mm, y unit chart=5mm, bar/.append style={fill=yellow!75},
+time slot format=isodate
+]{2018-05-14}{2018-06-07}
+\gantttitlecalendar{month = shortname, week=1, day, weekday = letter}{1}{25}\\
+\ganttbar[
+bar/.append style={fill=green!50}
+]{Initial research}{2018-05-14}{2018-05-16}\\
+\ganttmilestone{Proposal}
+{2018-05-16}\\
+\ganttbar{Order Parts}{2018-05-17}{2018-05-17}\\
+\ganttbar{Training}{2018-05-18}{2018-05-24}\\
+\ganttbar{Assess Team Development}{2018-05-25}{2018-05-28}\\
+\ganttbar{Prototype Design and Testing}{2018-05-17}{2018-06-04}\\
+\ganttbar{Website Design}{2018-05-24}{2018-06-06}\\
+\ganttbar{Prepare Interim Presentation}{2018-05-25}{2018-05-28}\\
+\ganttmilestone{Interim Presentation}
+{2018-05-28}\\
+\ganttbar{Assign Roles for Presentation}{2018-05-29}{2018-05-30}\\
+\ganttbar{Prepare Presentation}{2018-05-30}{2018-06-06}\\
+\ganttmilestone{Final Presentation}{2018-06-07}
+\end{ganttchart}
+\end{center}
+\caption{Gantt Chart}
+\end{figure}
 
 \subsubsection{Team Member Strengths etc.}
 Aaron - dashing good looks

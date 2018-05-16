@@ -74,18 +74,78 @@ As discussed in the introduction, two approaches were initially investigated for
 \subsubsection{Method 1 - The Syringe Method}
 The syringe method would make use of the current system implemented by WaterScope, with the addition of a mechanism (such as a Vice) which would enable a larger force to be applied to the syringe, whilst requiring less physical effort. The approximate costings for this can be seen in Table \ref{tab:syringecost}.
 
-\begin{table}[h]
+\begin{table}[]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-Item & Fixed Cost (Upfront), \pounds & Variable Cost (Per Use), \pounds & Cost of Purchase for Team\\ & & & (taking into account minimum\\ &&& order quantities), \pounds \\ \hline
-Syringe & \begin{tabular}[c]{@{}l@{}}0.00\end{tabular} & \begin{tabular}[c]{@{}l@{}}0.50\end{tabular} & 0.50 \\ \hline
-Vice & 30.61 & \begin{tabular}[c]{@{}l@{}}0.00\end{tabular} & 30.61 \\ \hline
+\textbf{Item}  & \textbf{Fixed Cost (Upfront), \pounds} & \textbf{Variable Cost (Per Use), \pounds} & \textbf{\begin{tabular}[c]{@{}c@{}}Cost of Purchase for Team \\ (taking into account MOQs),\pounds \end{tabular}} \\ \hline
+Syringe        & 0.00                             & 0.50                                & 0.00 (Supplied by WaterScope)                                                                               \\ \hline
+Vice           & 30.61                            & 0.00                                & 30.61                                                                                                       \\ \hline
+\textbf{Total} & 30.61                            & 0.50                                & 30.61                                                                                                       \\ \hline
 \end{tabular}
 \caption{\label{tab:syringecost}Approximate Costings For Syringe Method.}
 \end{table}
 
 \subsubsection{Method 2 - The Vacuum Method}
+
+The Vacuum method could be done in several ways, involving either a disposable filter attachment or sterilisation of a custom made filter attachment, however all the large and costly components would be very similar, as listed in Table \ref{tab:vacuumcost}, and the costs for a few of the different components and compared in Table \ref{tab:vacuumcost2}.
+
+\begin{table}[]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Item}                                                                   & \textbf{Fixed Cost (Upfront), \pounds} & \textbf{Variable Cost (Per Use), \pounds} & \textbf{\begin{tabular}[c]{@{}c@{}}Cost of Purchase for Team \\ (taking into account MOQs), \pounds\end{tabular}} \\ \hline
+\begin{tabular}[c]{@{}c@{}}Filtration Flask \\ e.g. Buchner Filter\end{tabular} & 13.42                            & 0.00                                & 25.10                                                                                                       \\ \hline
+Filter Adapter Set                                                              & 5.21                             & 0.00                                & 36.50                                                                                                       \\ \hline
+Buchner Funnel                                                                  & 21.70                            & 0.00                                & 21.70                                                                                                       \\ \hline
+Silicone Laboratory Tubing                                                      & 2.30                             & 0.00                                & 57.60                                                                                                       \\ \hline
+Vacuum Pump - Hand                                                              & 9.99                             & 0.00                                & 9.99                                                                                                        \\ \hline
+\textbf{Total}                                                                  & \textbf{52.62}                   & \textbf{0.00}                       & \textbf{150.89}                                                                                             \\ \hline
+\end{tabular}
+\caption{\label{tab:vacuumcost}Approximate Costings For Vacuum Set-up.}
+\end{table}
+
+\begin{table}[]
+\centering
+\begin{tabular}{|ccc|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Item}}           & \multicolumn{1}{c|}{\textbf{Fixed Cost (Upfront), \pounds}} & \textbf{Variable Cost (Per Use), \pounds} \\ \hline
+Pre-made disposable funnels                   & 0.00                                                  & 1.50                                \\ \hline
+\multicolumn{1}{|c|}{\textbf{Method 1 Total}} & \multicolumn{1}{c|}{0.00}                             & 1.50                                \\ \hline
+Disposable plastic water container            & 0.00                                                  & 0.50                                \\
+3D printed filter adaptor                     & 1.50                                                  & 0.00                                \\ \hline
+\multicolumn{1}{|c|}{\textbf{Method 2 Total}} & \multicolumn{1}{c|}{\textbf{1.50}}                    & \textbf{0.50}                       \\ \hline
+Folding water bottle                          & 3.18                                                  & 0.00                                \\
+3D printed filter adaptor                     & 1.50                                                  & 0.00                                \\
+Sterilisation Tablets                         & 0.00                                                  & 0.05                                \\ \hline
+\multicolumn{1}{|c|}{\textbf{Method 3 Total}} & \multicolumn{1}{c|}{\textbf{4.58}}                    & \textbf{0.05}                       \\ \hline
+\end{tabular}
+\caption{\label{tab:vacuumcost2}Approximate Costings For Vacuum Methods Compared.}
+\end{table}
+
+As can be seen from the tables, all options are significantly over the \pounds20 budget set by WaterScope, but several options are cheaper than the \pounds0.50 variable cost for their current filtering method. Additionally, with a larger scale production and less limitations on where parts can be ordered from, the upfront fixed cost of any of the methods listed could be drastically reduced. From a cost perspective, a re-usable filtration container combined with sterilisation appears to be the best option at this stage.
+
+\subsubsection{Parts}
+
+The parts required for purchase at this preliminary stage are listed in Table \ref{tab:partsorder}.
+
+\begin{table}[]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Part}                                   & \textbf{Cost, \pounds} & \textbf{Vendor} \\ \hline
+Duran® filtering flask, with Keck® assembly set & 25.10                                & Sigma           \\ \hline
+Filter Adapter Set                              & 36.50                                & Sigma           \\ \hline
+Scienceware polypropylene Buchner Funnel        & 21.70                                & Sigma           \\ \hline
+Silicon laboratory tubing                       & 57.60                                & Sigma           \\ \hline
+LDPE wash bottle, set of 12                     & 47.20                                & Sigma           \\ \hline
+Folding water bottle                            & 3.18                                 & Amazon          \\ \hline
+Basic double action hand pump                   & 9.99                                 & Argos           \\ \hline
+KNF Laboport® solid PTFE vacuum pump            & 16.20                                & Sigma           \\ \hline
+\textbf{Total Cost}                             & \textbf{217.47}                      & \textbf{}       \\ \hline
+\end{tabular}
+\caption{\label{tab:partsorder}Parts to Order.}
+\end{table}
 
 \subsection{Risk Assessment}
 

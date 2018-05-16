@@ -5,7 +5,6 @@
 \newcommand{\tick}{\ding{51}}
 \newcommand{\cross}{\ding{55}}
 \usepackage[dvipsnames]{xcolor}
-\newcommand{\e}[1]{{\mathbb E}\left[ #1 \right]}
 \textwidth 18cm \oddsidemargin -0.5cm \topmargin -2.25cm \textheight
 25cm \footskip 0.7cm \usepackage{epsfig}
 \usepackage{amsmath,graphicx,psfrag,pstcol}
@@ -14,39 +13,117 @@
 \def\hs{\hspace}
 \newcommand{\thrfor}{.^{\displaystyle .} .}
 \newcommand{\bvec}[1]{{\bf #1}}
-\graphicspath{{./Figures/}}
-
+\usepackage{pgfgantt}
+\def\pgfcalendarweekdayletter#1{
+%
+\ifcase#1M\or T\or W\or T\or F\or S\or S\fi
+%
+}
 \begin{document}
 
 \noindent
-\rule{15.7cm}{0.5mm}
-
 
 \begin{center}
+\rule{15.7cm}{0.5mm}
 {\bf Technology for the Poorest Billion}\\
 \vspace{0.5cm} {\bf Waterscope - Project Overview}\\
-\end{center}
 \rule{15.7cm}{0.5mm}
+\end{center}
 
-\hfill\\
 \section{Proposal}
 \subsection{Overview, Context and Approach}
 \subsubsection{Waterscope}
-Waterscope is a small company formed in 2015 to attempt to combat the lack of access to safe drinking water. Currently, waterborne diseases from bacteria results in over 2.2 million deaths per year - the aim of Waterscope is to devise a simple, fast, water testing kit which can be used to quantitatively test water sources on site for bacterial levels within a few hours.
+Waterscope is a small company formed in 2015 to attempt to combat the lack of access to safe drinking water. Currently, waterborne diseases from bacteria results in over 2.2 million deaths per year - the aim of WaterScope is to devise a simple, fast, water testing kit which can be used to quantitatively test water sources on site for bacterial levels within a few hours.
 \subsubsection{The Problem}
 As part of this testing kit, water is filtered through an extremely fine filter, which collects (some of) the bacteria. However, the current system (using a syringe) is slow and energetic, and therefore unsuitable for widespread use by people of a variety of strengths and abilities etc. The task of our team is to design a mechanism for filtering that allows a more rapid, and easier, method of passing the required volume of water ($\approx 100$ml) through the filter.\\
 A second issue regarding this system is cost. While the overall testing apparatus can be of a reasonable cost (several $\pounds$100), the components used for filtering (which, since they require sterility, are designed to be disposable) must be very cheap. This makes the current solution of a syringe impractical, since even the relatively low cost of a syringe ($\approx$ 50p) is prohibitive.
 \subsubsection{Approaches}
 Two main approaches occurred to us. The first option was to consider a different syringe-like device which allows the application of a greater force, thereby increasing flow rate. However, we reasoned that this would be even more expensive than the original solution - designing our own custom syringe is unlikely to be of a practical cost.\\
-The second idea, and the idea which the WaterScope team recommended that we pursue, was to design a vacuum filtering system. We decided that it would be relatively feasible to design a cheap vacuum pump that is cheap and easy to manufacture, ideally in-country, as well as a sealed interface between filter and collection vessel. We plan to use a glass flask as our collection vessel for now, in the understanding that modifications could be made relatively easily in the future by the WaterScope team if a glass flask proves to be impractical. The benefit of this solution is, in theory, its low cost - since the pump and flask both lie downstream of the filter (as well as large portions of our proposed interface system), they are not required to be disposable and therefore are permitted to be more expensive.
+The second idea, and the idea which the WaterScope team recommended that we pursue, was to design a vacuum filtering system. We decided that it would be relatively feasible to design a cheap vacuum pump that is cheap and easy to manufacture, ideally in-country, as well as a sealed interface between filter and collection vessel. We plan to use a glass flask as our collection vessel for now, in the understanding that modifications could be made relatively easily in the future by the WaterScope team if a glass flask proves to be impractical. The benefit of this solution is, in theory, its low cost - since the pump and flask both lie downstream of the filter (as well as large portions of our proposed interface system), they are not required to be disposable and therefore are permitted to be more expensive.\\
+We considered two possibilities to implement this vacuum design, discussed in the next section.
 \subsection{Technical Aspects}
+\vspace{1.5cm}
+\begin{figure}[!htbp]
+\begin{center}
+\caption{Idea 1}
+\includegraphics[width = 15cm]{{3D_Model_1}.png}
+\caption{Idea 2}
+\includegraphics[width = 15cm]{{3D_Model_2}.png}
+\end{center}
+\end{figure}
+
+When coming up with concepts, where possible we have aimed to technically evaluate the feasibility of the approach to meet the design targets. We have been tasked by Waterscope of filtering at least 100ml in less than 10 min, through the 13mm diameter filers they will provide. \\
+The current method employed by Waterscope is using a syringe to manually force the liquid through, and takes them 10 minutes. From this knowledge we can be confident that it would be feasible to design an analogous mechanical forcing mechanism that would achieve the same or better filter times with the same or less force. \\
+The other forcing technique we are considering in our concepts is creating a pressure differential across the filter paper. The technical specifications of the filter paper we are using have been provided by Waterscope and detail a water flow rate of at least 50ml per minute when subjected to a pressure difference of 10psi. Since atmospheric pressure is ~14.7psi and a standard bike pump is capable of getting to around 75\% of a perfect vacuum, we should be able to use a negative pressure method to get a pressure difference of 11psi, and a correcponding filter time of around 2 minutes. With a positive pressure method we could potentially achieve an even greater pressure differential (if the container can withstand it) which could further reduce filter times. Therefore, pressure methods seem to have potential to decrease filter times drastically while also reducing the input force required by the user. Another advantage is that if we achieved a good seal, ideally the pressure difference, once established, would work to filter the sample without any additional action from the user.  
 
 \subsection{Project Management Plan}
-
-\subsubsection{Timeline?}
+Our project outline will be centred on the following Gantt chart, which details the specific tasks to be completed by certain dates.\\
+We are using Slack for all project communication, both between team members and to communicate with the team at WaterScope.\\
+GitHub is being used for all file uploads, to track progress and changes made by individual group members, and to show who has contributed to which parts of the group projects.\\
+We plan to complete the first project proposal collaboratively, by working on separate parts, uploading them to Git and then adding and editing the work of our peers as we best see fit.
+\subsubsection{Timeline}
+The following Gantt Chart, team strengths and training plans detail the key points of the project management plan to be discussed.
+\begin{figure}[h]
+\begin{center}
+\begin{ganttchart}[
+hgrid,
+vgrid,
+x unit=4mm, y unit title=7mm, y unit chart=5mm, bar/.append style={fill=yellow!75},
+time slot format=isodate
+]{2018-05-14}{2018-06-07}
+\gantttitlecalendar{month = shortname, week=1, day, weekday = letter}{1}{25}\\
+\ganttbar[
+bar/.append style={fill=green!50}
+]{Initial research}{2018-05-14}{2018-05-16}\\
+\ganttmilestone{Proposal}
+{2018-05-16}\\
+\ganttbar{Order Parts}{2018-05-17}{2018-05-17}\\
+\ganttbar{Training}{2018-05-18}{2018-05-24}\\
+\ganttbar{Assess Team Development}{2018-05-25}{2018-05-28}\\
+\ganttbar{Prototype Design and Testing}{2018-05-17}{2018-06-04}\\
+\ganttbar{Website Design}{2018-05-24}{2018-06-06}\\
+\ganttbar{Prepare Interim Presentation}{2018-05-25}{2018-05-28}\\
+\ganttmilestone{Interim Presentation}
+{2018-05-28}\\
+\ganttbar{Assign Roles for Presentation}{2018-05-29}{2018-05-30}\\
+\ganttbar{Prepare Presentation}{2018-05-30}{2018-06-06}\\
+\ganttmilestone{Final Presentation}{2018-06-07}
+\end{ganttchart}
+\end{center}
+\caption{Gantt Chart}
+\end{figure}
 
 \subsubsection{Team Member Strengths etc.}
-Aaron - dashing good looks, modest.
+
+\begin{table}[!h]
+\caption{}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Team Member & Strengths & Weaknesses\\
+ \hline
+Aaron & - 3D Printing Experience & - Lack of Mechanical Experience\\
+& - Problem Solving Skills & \\
+& - Some CAD knowledge & \\
+\hline
+Monica & - Problem Solving Skills & - Lack of Mechanical Experience \\
+& - Web Design Ability & \\
+\hline
+Nathan & - Mechanical Knowledge & - Lack of Coding Experience \\
+& - Design \& CAD & \\
+& - Problem Solving Skills &\\
+\hline
+Sajan & - 3D Printing Experience & - Lack of Coding Experience\\
+& - Design \& CAD & \\
+& - Problem Solving Skills &\\
+\hline
+Katie & - Web Design Experience & \\
+& - Problem Solving Skills &\\
+\hline
+\end{tabular}
+\end{center}
+\label{default}
+\end{table}
 
 \subsubsection{Skills/Training Required}
 
@@ -55,16 +132,8 @@ During the course of the 4 week project, the whole team will be required to draw
 \begin{itemize}
 \item CAD/modelling: Computer aided design is the most efficient method for creating any models of proposed designs, due to it's easy to refine/edit nature. We anticipate initial design ideas being expressed via hand drawings but the skill of translating the best contenders into CAD models quickly and accurately will likely prove valuable when determining the performance and manufacturing feasibility of our design ideas. 
 \item 3D printing/rapid-protyping: The ability to create physical models of our designs is going to be essential in not only testing but realising our designs. The 3D printers available to in the department are a fantastic tool for creating complex geometries quickly and over the course of the project most members of our group will learn/utilise the skill of turning CAD models into products using 3D printing. 
-\item Laser/plasma cutter: We also anticipate the need to use other manufacturing methods when making our prototypes, and will endeavor to learn the skills to use the Dyson Centre's cutting tools if the need arises. 
+\item Laser/plasma cutter: We also anticipate the need to use other manufacturing methods when making our prototypes, and will endeavour to learn the skills to use the Dyson Centre's cutting tools if the need arises. 
 \item Web Design: Our final proposal will be presented in the form of a website that provides a detailed but intuitive overview of the teams progress towards a solution. This will require coding skills in languages such as HTML and Javascript, and graphic/user interface design skills to make sure the website functions ideally and is easy for the end user to navigate.  
-\end{itemize}
- 
-\n We also anticipate our proficiency when functioning as a team will depend greatly on certain 'soft skills' such as: 
-
-\begin{itemize}
-\item Time Management - Gantt Chart 
-\item Communication Skills - slack 
-\item Workload sharing/delegation - Github 
 \end{itemize}
 
 \subsection{Costing \& Parts}
@@ -164,14 +233,20 @@ Laser/Plasma cutting & Possible injuries to extremities & Proper training & Medi
 
 \subsection{Contingency Plan}
 
-What could go wrong, and what can we do about it?\\
-\textit{Would prefer to flesh this out once we know more about the specifics of the project}
-\begin{itemize}
-\item
-\end{itemize}
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+Possible issues & Solution(s) & Notes \\ \hline
+\begin{tabular}[c]{@{}l@{}}Seal at the top of the flask \\ not tight enough\end{tabular} & Redesign seal & \begin{tabular}[c]{@{}l@{}}The seal is an essential part of \\ the prototype; a problem here \\ would need to be addressed with \\ highest priority.\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Force from vacuum pump not \\ enough to pull water \\ through the filter\end{tabular} & \begin{tabular}[c]{@{}l@{}}Check seal at the top \\ of the flask and between \\ flask and pump\\ Change pump\end{tabular} &  \\ \hline
+\begin{tabular}[c]{@{}l@{}}Insufficient contact with \\ Waterscope\end{tabular} & \begin{tabular}[c]{@{}l@{}}Keep trying to contact them\\ Decide and move ahead \\ with plan\\ Find other resources to\\ guide us\end{tabular} & \begin{tabular}[c]{@{}l@{}}If we cannot get sufficient information \\ from  Waterscope in time, we would\\ need to decide on a plan by making \\ assumptions about their desired \\ specifications\end{tabular} \\ \hline
+\begin{tabular}[c]{@{}l@{}}Team member(s) become \\ ill/other extenuating \\ circumstances\end{tabular} & \begin{tabular}[c]{@{}l@{}}Redistribute work using \\ Gantt chart\end{tabular} &  \\ \hline
+\end{tabular}
+\end{table}
 
 
-\section{Interim}
+\section{Interim Report}
 
 \section{Presentation}
 

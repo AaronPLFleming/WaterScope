@@ -33,14 +33,14 @@
 \section{Proposal}
 \subsection{Overview, Context and Approach}
 \subsubsection{Waterscope}
-Waterscope is a small company formed in 2015 to attempt to combat the lack of access to safe drinking water. Currently, waterborne diseases from bacteria results in over 2.2 million deaths per year - the aim of WaterScope is to devise a simple, fast, water testing kit which can be used to quantitatively test water sources on site for bacterial levels within a few hours.
+WaterScope is a small company formed in 2015 to attempt to combat the lack of access to safe drinking water. Currently, waterborne diseases from bacteria results in over 2.2 million deaths per year - the aim of WaterScope is to devise a simple, fast, water testing kit which can be used to quantitatively test water sources on site for bacterial levels within a few hours.
 \subsubsection{The Problem}
 As part of this testing kit, water is filtered through an extremely fine filter, which collects (some of) the bacteria. However, the current system (using a syringe) is slow and energetic, and therefore unsuitable for widespread use by people of a variety of strengths and abilities etc. The task of our team is to design a mechanism for filtering that allows a more rapid, and easier, method of passing the required volume of water ($\approx 100$ml) through the filter.\\
 A second issue regarding this system is cost. While the overall testing apparatus can be of a reasonable cost (several $\pounds$100), the components used for filtering (which, since they require sterility, are designed to be disposable) must be very cheap. This makes the current solution of a syringe impractical, since even the relatively low cost of a syringe ($\approx$ 50p) is prohibitive.
 \subsubsection{Approaches}
 Two main approaches occurred to us. The first option was to consider a different syringe-like device which allows the application of a greater force, thereby increasing flow rate. However, we reasoned that this would be even more expensive than the original solution - designing our own custom syringe is unlikely to be of a practical cost.\\
 The second idea, and the idea which the WaterScope team recommended that we pursue, was to design a vacuum filtering system. We decided that it would be relatively feasible to design a cheap vacuum pump that is cheap and easy to manufacture, ideally in-country, as well as a sealed interface between filter and collection vessel. We plan to use a glass flask as our collection vessel for now, in the understanding that modifications could be made relatively easily in the future by the WaterScope team if a glass flask proves to be impractical. The benefit of this solution is, in theory, its low cost - since the pump and flask both lie downstream of the filter (as well as large portions of our proposed interface system), they are not required to be disposable and therefore are permitted to be more expensive.\\
-We considered two possibilities to implement this vacuum design, discussed in the Technical Aspects section.
+We considered two possibilities to implement this vacuum design, discussed in section \ref{section:tech}.\\\par
 \subsection{Unicef Principles for Innovation and Technology in Development}
 Central to this project are the Unicef Principles for Innovation and Technology in Development. These are:
 \begin{enumerate}
@@ -54,9 +54,9 @@ Central to this project are the Unicef Principles for Innovation and Technology 
 \item Do no harm
 \item Be Collaborative
 \end{enumerate}
-The nature of this project means that not all of these principles must be, or even should be, achieved directly by us - the ultimate implementation of this project, and its conformity to these principes will be dependent on the behaviour of WaterScope. However, there are important aspects for us to consider ourselves.\\
+The nature of this project means that not all of these principles must be, or even should be, achieved directly by us - the ultimate implementation of this project, and its conformity to these principles will be dependent on the behaviour of WaterScope. However, there are important aspects for us to consider ourselves.\\
 By working alongside WaterScope, we are hoping to achieve principles 1 and 2 - these are largely limited by us being unable to directly contact people in-country, but we hope working with WaterScope will help us to achieve some level of success in these. WaterScope are keen to maintain low costs, assisting with principles 3 and 4. Our ability to achieve principles 5 and 8 may be limited, however, since these relate in many ways to the product as a whole, and in its final implementation. We hope that by documenting via the open platform of GitHub that we will achieve relative success in principle 6. Principle 7 is hard to assess for this project, but where possible, we will be building on work completed by WaterScope, which should help with this. Finally, we hope that by good collaboration both within our group, and externally with WaterScope (and in turn, their collaboration with users), we should be relatively successful in principle 9.
-\subsection{Technical Aspects}
+\subsection{Technical Aspects \label{section:tech}}
 \begin{figure}[!htbp]
 \begin{center}
 \caption{Idea 1}
@@ -72,7 +72,7 @@ The other forcing technique we are considering in our concepts is creating a pre
 
 \subsection{Project Management Plan}
 Our project outline will be structured around a Gantt chart (summarised below), which details the specific tasks to be completed by certain dates.\\
-The cloud based collaberation tool Slack is being used for all project communication, both between team members and to communicate with the team at WaterScope. Secondly, the web-based hosting service GitHub is being used for all file uploads, to track progress and changes made by individual group members, and to show who has contributed to specific parts of the group projects.\\
+The cloud based collaboration tool Slack is being used for all project communication, both between team members and to communicate with the team at WaterScope. Secondly, the web-based hosting service GitHub is being used for all file uploads, to track progress and changes made by individual group members, and to show who has contributed to specific parts of the group projects.\\
 We plan to complete the first project proposal collaboratively, by working on separate parts, uploading them to Git and then adding and editing the work of our peers as we best see fit.
 \subsubsection{Timeline}
 The following Gantt Chart, team strengths and training plans detail the key points of the project management plan to be discussed.
@@ -107,9 +107,8 @@ bar/.append style={fill=green!50}
 \end{figure}
 
 \subsubsection{Team Member Strengths etc.}
-
+See table \ref{table:strengths}.
 \begin{table}[!h]
-\caption{}
 \begin{center}
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -130,10 +129,11 @@ Sajan & - 3D Printing Experience & - Lack of Coding Experience\\
 & - Design \& CAD & \\
 & - Problem Solving Skills &\\
 \hline
-Katie & - Web Design Experience & \\
+Katie & - Web Design Experience & Lack of Mechanical Experience\\
 & - Problem Solving Skills &\\
 \hline
 \end{tabular}
+\caption{Team Member Strengths and Weaknesses: Overview \label{table:strengths}}
 \end{center}
 \label{default}
 \end{table}
@@ -170,13 +170,13 @@ Vice           & 30.61                            & 0.00                        
 
 \subsubsection{Method 2 - The Vacuum Method}
 
-The Vacuum method could be done in several ways, involving either a disposable filter attachment or sterilisation of a custom made filter attachment, however all the large and costly components would be very similar, as listed in Table \ref{tab:vacuumcost}, and the costs for a few of the different components and compared in Table \ref{tab:vacuumcost2}.
+The Vacuum method could be done in several ways, involving either a disposable filter attachment or sterilisation of a custom made filter attachment, however all the large and costly components would be very similar, as listed in Table \ref{tab:vacuumcost}, and the costs for a few of the different components are compared in Table \ref{tab:vacuumcost2}.
 
 \begin{table}[]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Item}                                                                   & \textbf{Fixed Cost, \pounds} & \textbf{Variable Cost, \pounds} & \textbf{\begin{tabular}[c]{@{}c@{}}Cost of Purchase for Team \\ (taking into account MOQs), \pounds\end{tabular}} \\ \hline
+\textbf{Item}                                                                   & \textbf{Fixed Cost, \pounds} & \textbf{Variable Cost, \pounds} & \textbf{\begin{tabular}[c]{@{}c@{}}Cost of Purchase for \\ Team (taking into\\ account MOQs), \pounds\end{tabular}} \\ \hline
 \begin{tabular}[c]{@{}c@{}}Filtration Flask \\ e.g. Buchner Filter\end{tabular} & 13.42                            & 0.00                                & 25.10                                                                                                       \\ \hline
 Filter Adapter Set                                                              & 5.21                             & 0.00                                & 36.50                                                                                                       \\ \hline
 Buchner Funnel                                                                  & 21.70                            & 0.00                                & 21.70                                                                                                       \\ \hline
@@ -204,14 +204,12 @@ Sterilisation Tablets                         & 0.00                            
 \end{tabular}
 \caption{\label{tab:vacuumcost2}Approximate Costings For Vacuum Methods Compared.}
 \end{table}
-
+\n
 As can be seen from the tables, all options are significantly over the \pounds20 budget set by WaterScope, but several options are cheaper than the \pounds0.50 variable cost for their current filtering method. Additionally, with a larger scale production and less limitations on where parts can be ordered from, the upfront fixed cost of any of the methods listed could be drastically reduced. From a cost perspective, a re-usable filtration container combined with sterilisation appears to be the best option at this stage.
-
 \subsubsection{Parts}
 
 The parts required for purchase at this preliminary stage are listed in Table \ref{tab:partsorder}.
-
-\begin{table}[]
+\begin{table}[!h]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
@@ -242,11 +240,12 @@ Handling plastic bags & Risk of suffocation from bag & \begin{tabular}[c]{@{}l@{
 Laser/Plasma cutting & Possible injuries to extremities & Proper training & Medium \\ \hline
 \begin{tabular}[c]{@{}l@{}}Extended use of \\ computer screens \end{tabular} & Straining of eyes & Limit computer usage & Low \\ \hline
 \end{tabular}
+\caption{Risk Assessment}
 \end{table}
 
 \subsection{Contingency Plan}
-
-\begin{table}[h]
+Some potential issues and our response to these is given in table \ref{table:contin}.
+\begin{table}[!htbp]
 \centering
 \begin{tabular}{|l|l|l|}
 \hline
@@ -254,11 +253,11 @@ Possible issues & Solution(s) & Notes \\ \hline
 \begin{tabular}[c]{@{}l@{}}Seal at the top of the flask \\ not tight enough\end{tabular} & Redesign seal & \begin{tabular}[c]{@{}l@{}}The seal is an essential part of \\ the prototype; a problem here \\ would need to be addressed with \\ highest priority.\end{tabular} \\ \hline
 \begin{tabular}[c]{@{}l@{}}Force from vacuum pump not \\ enough to pull water \\ through the filter\end{tabular} & \begin{tabular}[c]{@{}l@{}}Check seal at the top \\ of the flask and between \\ flask and pump\\ Change pump\end{tabular} &  \\ \hline
 \begin{tabular}[c]{@{}l@{}}Insufficient contact with \\ Waterscope\end{tabular} & \begin{tabular}[c]{@{}l@{}}Keep trying to contact them\\ Decide and move ahead \\ with plan\\ Find other resources to\\ guide us\end{tabular} & \begin{tabular}[c]{@{}l@{}}If we cannot get sufficient information \\ from  Waterscope in time, we would\\ need to decide on a plan by making \\ assumptions about their desired \\ specifications\end{tabular} \\ \hline
-\begin{tabular}[c]{@{}l@{}}Team member(s) become \\ ill/other extenuating \\ circumstances\end{tabular} & \begin{tabular}[c]{@{}l@{}}Redistribute work using \\ Gantt chart\end{tabular} &  \\ \hline
+\begin{tabular}[c]{@{}l@{}}Team member(s) become \\ ill/other extenuating \\ circumstances\end{tabular} & \begin{tabular}[c]{@{}l@{}}Redistribute work using \\ Gantt chart\end{tabular} & \\ \hline
 \end{tabular}
+\caption{Contingency Plan \label{table:contin}}
 \end{table}
-
-
+\vspace{3cm}
 \section{Interim Report}
 
 \section{Presentation}
